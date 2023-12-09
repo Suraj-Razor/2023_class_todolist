@@ -33,7 +33,19 @@ def remove_todo(file_name):
 
 def mark_todo(file_name):
   print("mark todo")
-
+  todo_name = input("Enter the todo name that you want to mark as complete")
+  todo_lists = []
+  with open(file_name, "r") as f:
+    reader = csv.reader(f)
+    for row in reader:
+      if row[0] !=  todo_name:
+        todo_lists.append(row)
+      else:
+        todo_lists.append([row[0], "True"])
+  with open(file_name, "w") as f:
+    writer = csv.writer(f)
+    writer.writerow(todo_lists)
+    
 def view_todo(file_name):
   print("View todo")
   with open(file_name, "r") as f:
